@@ -40,8 +40,14 @@ def hello_world():
 def get_users():
     if request.method == 'GET':
         name = request.args.get('name')
-        if name :
-            matching = list(filter(lambda p : p["name"] == name, users["users_list"]))
+        job = request.args.get('job')
+        if name and job:
+            matching = list(filter(lambda p : p["name"] == name and p['job'] == job,
+                                   users["users_list"]))
+            return {'users_list': matching}
+        elif name :
+            matching = list(filter(lambda p : p["name"] == name,
+                                   users["users_list"]))
             return {'users_list': matching}
         return users
     elif request.method == 'POST':
