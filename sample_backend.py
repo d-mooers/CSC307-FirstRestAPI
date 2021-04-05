@@ -55,7 +55,8 @@ def get_users():
     elif request.method == 'POST':
         newUser = request.get_json()
         users['users_list'].append(newUser)
-        resp = jsonify(success=True)
+        resp = jsonify(newUser)
+        resp.status_code = 201
         return resp
 
 @app.route('/users/<id>', methods=['GET', 'DELETE'])
