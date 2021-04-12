@@ -78,7 +78,8 @@ def get_user(id):
             users['users_list'] = list(filter(lambda p : p['id'] != id, 
                                          users['users_list']))
             resp = jsonify(success=True)
+            resp.status_code = 204
             return resp
         resp = jsonify(success=False)
-        resp.status_code = 401
+        resp.status_code = 404
         return resp
